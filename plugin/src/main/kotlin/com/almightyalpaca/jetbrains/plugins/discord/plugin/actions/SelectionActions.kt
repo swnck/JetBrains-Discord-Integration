@@ -20,6 +20,7 @@ import com.almightyalpaca.jetbrains.plugins.discord.plugin.settings.options.type
 import com.almightyalpaca.jetbrains.plugins.discord.plugin.settings.options.types.UiValueType
 import com.almightyalpaca.jetbrains.plugins.discord.plugin.settings.settings
 import com.almightyalpaca.jetbrains.plugins.discord.plugin.settings.values.ProjectShow
+import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DefaultActionGroup
 import com.intellij.openapi.project.DumbAware
@@ -44,6 +45,10 @@ abstract class AbstractSelectionAction<T>(
         }
     }
 
+    override fun getActionUpdateThread(): ActionUpdateThread {
+        return ActionUpdateThread.EDT
+    }
+
     override fun update(e: AnActionEvent) {
         super.update(e)
 
@@ -66,6 +71,10 @@ abstract class AbstractSelectionAction<T>(
             if (state) {
                 e.project?.let { currentValue(it).setStoredValue(value) }
             }
+        }
+
+        override fun getActionUpdateThread(): ActionUpdateThread {
+            return ActionUpdateThread.EDT
         }
 
         override fun update(e: AnActionEvent) {

@@ -69,11 +69,12 @@ subprojects {
     tasks {
         withType<KotlinCompile> {
             kotlinOptions {
-                jvmTarget = libs.versions.jdk.get()
+                jvmTarget = "18"
                 freeCompilerArgs += "-Xjvm-default=all"
 
-                apiVersion = kotlinLanguageVersion(libs.versions.kotlin.ide())
-                languageVersion = kotlinLanguageVersion(libs.versions.kotlin.ide())
+
+                apiVersion = kotlinLanguageVersion("1.9.0")
+                languageVersion = kotlinLanguageVersion("1.9.0")
             }
         }
     }

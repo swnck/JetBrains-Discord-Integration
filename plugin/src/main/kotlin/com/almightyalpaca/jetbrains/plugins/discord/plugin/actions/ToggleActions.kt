@@ -18,6 +18,7 @@ package com.almightyalpaca.jetbrains.plugins.discord.plugin.actions
 
 import com.almightyalpaca.jetbrains.plugins.discord.plugin.settings.options.types.BooleanValue
 import com.almightyalpaca.jetbrains.plugins.discord.plugin.settings.settings
+import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.project.DumbAwareToggleAction
 import com.intellij.openapi.project.Project
@@ -32,4 +33,8 @@ abstract class AbstractToggleAction(private val currentValue: (Project) -> Boole
     override fun isSelected(e: AnActionEvent) = e.project?.let { currentValue(it).getStoredValue() } == true
 
     override fun setSelected(e: AnActionEvent, state: Boolean) = e.project?.let { currentValue(it).setStoredValue(state) } ?: Unit
+
+    override fun getActionUpdateThread(): ActionUpdateThread {
+        return ActionUpdateThread.EDT
+    }
 }
